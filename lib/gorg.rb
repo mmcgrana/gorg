@@ -7,7 +7,7 @@ class Gorg
   CTL_RE = /^\/ctl\//
 
   def initialize(opts)
-    @log = !!opts[:log]
+    @log = !opts[:quiet]
     @path = opts[:path]
   end
 

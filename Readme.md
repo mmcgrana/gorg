@@ -31,10 +31,6 @@ Stream state from a Doozer process into an append-only file (not yet implemented
     $ echo "second" | doozer add /two
     $ echo "third" | doozer add /three
 
-Enable logging during any operation:
-
-    $ gorg dump -l -f doozer.dat
-
 ## Installation
 
     $ gem install fraggle --pre

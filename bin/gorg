@@ -10,7 +10,7 @@ ARGV.options do |o|
   o.set_summary_indent("  ")
   o.banner = "Usage: gorg <dump|sink|load> [options]"
   o.on("-f", "--file=path", String, "Path to Doozer state file") { |p| opts[:path] = p }
-  o.on("-l", "--log", "Log to stdout") { opts[:log] = true }
+  o.on("-q", "--quiet", "Suppress logs") { opts[:quiet] = true }
   o.on("-h", "--help", "Show this help message") { abort(o.to_s) }
   o.separator("")
   o.parse!
