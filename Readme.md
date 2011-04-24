@@ -39,11 +39,9 @@ Omit the `-f` argument to use standard in and out:
 
 ## Installation
 
-    $ gem install fraggle --pre
-    $ gem install json
-    $ git clone git@github.com:mmcgrana/gorg.git
+    $ git clone git://github.com/mmcgrana/gorg.git
     $ cd gorg
-    $ bin/gorg
+    $ bundle install
 
 
 ## Notes

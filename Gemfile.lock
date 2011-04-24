@@ -1,0 +1,16 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    beefcake (0.3.1)
+    eventmachine (0.12.10)
+    fraggle (1.0.0pre)
+      beefcake (~> 0.3)
+    json (1.5.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  eventmachine (= 0.12.10)
+  fraggle (= 1.0.0pre)
+  json (= 1.5.1)
