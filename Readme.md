@@ -47,4 +47,4 @@ Omit the `-f` argument to use standard in and out:
 ## Notes
 
 * Saves but does not not load data under the `/ctl` prefix, which is used internally by Doozer.
-* Does not preserve `rev`s across saves and restores.
+* Saves but does not load `rev`s.

@@ -23,7 +23,7 @@ class Gorg
       log("dump event=req")
       client.walk(nil, "/**") do |r|
         log("dump event=res path=#{r.path}")
-        file.puts(JSON.dump({"path" => r.path, "value" => r.value}))
+        file.puts(JSON.dump({"path" => r.path, "value" => r.value, "rev" => r.rev}))
       end.done do
         log("dump event=stop")
         EM.stop
