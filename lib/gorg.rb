@@ -13,7 +13,7 @@ class Gorg
 
   def dump
     log("dump event=open")
-    file = File.open(@path, "w")
+    file = @path ? File.open(@path, "w") : $stdout
     log("dump event=run")
     EM.run do
       log("dump event=connect")
@@ -36,7 +36,7 @@ class Gorg
 
   def load
     log("load event=open")
-    file = File.open(@path, "r")
+    file = @path ? File.open(@path, "r") : $stdin
     log("load event=run")
     finishing = false
     EM.run do
@@ -66,6 +66,6 @@ class Gorg
   end
 
   def log(msg)
-    puts("gorg #{msg}") if @log
+    $stderr.puts("gorg #{msg}") if @log
   end
 end

@@ -31,6 +31,12 @@ Stream state from a Doozer process into an append-only file (not yet implemented
     $ echo "second" | doozer add /two
     $ echo "third" | doozer add /three
 
+Omit the `-f` argument to use standard in and out:
+
+    $ gorg load < doozer.dat
+    $ gorg dump > doozer.dat
+
+
 ## Installation
 
     $ gem install fraggle --pre

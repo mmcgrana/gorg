@@ -16,7 +16,7 @@ ARGV.options do |o|
   o.parse!
   action = ARGV.first
 
-  abort(o.to_s) if (!action || !opts[:path])
+  abort(o.to_s) if !action
 
   Gorg.new(opts).send(action)
 end
