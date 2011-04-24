@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require "optparse"
-
 $:.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 require "gorg"
 
@@ -14,9 +13,13 @@ ARGV.options do |o|
   o.on("-h", "--help", "Show this help message") { abort(o.to_s) }
   o.separator("")
   o.parse!
-  action = ARGV.first
+  action = ARGV.shift
 
-  abort(o.to_s) if !action
-
-  Gorg.new(opts).send(action)
+  if !ARGV.empty?
+    abort("Unrecognized arguments: #{ARGV.join(" ")}\n\n#{o}")
+  elsif !action
+    abort("Missing operation.\n\n#{o}")
+  else
+    Gorg.new(opts).send(action)
+  end
 end
