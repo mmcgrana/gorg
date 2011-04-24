@@ -20,6 +20,7 @@ class Gorg
   def dump
     log("dump event=open")
     file = @path ? File.open(@path, "w") : $stdout
+    file.sync = true
     log("dump event=run")
     EM.run do
       log("dump event=connect")
@@ -41,6 +42,7 @@ class Gorg
   def sink
     log("sink event=open")
     file = @path ? File.open(@path, "w") : $stdout
+    file.sync = true
     log("sink event=run")
     EM.run do
       log("sink event=connect")
