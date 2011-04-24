@@ -23,9 +23,7 @@ class Gorg
       log("dump event=req")
       client.walk(nil, "/**") do |r|
         log("dump event=res path=#{r.path}")
-        if !r.path.match(CTL_RE)
-          file.puts(JSON.dump({"path" => r.path, "value" => r.value}))
-        end
+        file.puts(JSON.dump({"path" => r.path, "value" => r.value}))
       end.done do
         log("dump event=stop")
         EM.stop
@@ -46,13 +44,17 @@ class Gorg
       client = Fraggle.connect
       while (line = file.gets)
         data = JSON.parse(line)
-        log("load event=req path=#{data["path"]}")
-        client.set(-1, data["path"], data["value"]) do
-          log("load event=res path=#{data["path"]}")
-          if finishing
-            log("load event=stop")
-            EM.stop
-            log("load event=finish")
+        if data["path"].match(CTL_RE)
+          log("load event=skip path=#{data["path"]}")
+        else
+          log("load event=req path=#{data["path"]}")
+          client.set(-1, data["path"], data["value"]) do
+            log("load event=res path=#{data["path"]}")
+            if finishing
+              log("load event=stop")
+              EM.stop
+              log("load event=finish")
+            end
           end
         end
       end
