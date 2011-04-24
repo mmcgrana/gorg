@@ -1,4 +1,6 @@
 require "rubygems"
+require "bundler"
+Bundler.setup
 require "eventmachine"
 require "fraggle"
 require "json"
