@@ -13,6 +13,10 @@ class Gorg
     @path = opts[:path]
   end
 
+  def write(file, r)
+    file.puts(JSON.dump({"path" => r.path, "value" => r.value, "rev" => r.rev}))
+  end
+
   def dump
     log("dump event=open")
     file = @path ? File.open(@path, "w") : $stdout
@@ -23,13 +27,38 @@ class Gorg
       log("dump event=req")
       client.walk(nil, "/**") do |r|
         log("dump event=res path=#{r.path}")
-        file.puts(JSON.dump({"path" => r.path, "value" => r.value, "rev" => r.rev}))
+        write(file, r)
       end.done do
         log("dump event=stop")
         EM.stop
         log("dump event=close")
         file.close
         log("dump event=finish")
+      end
+    end
+  end
+
+  def sink
+    log("sink event=open")
+    file = @path ? File.open(@path, "w") : $stdout
+    log("sink event=run")
+    EM.run do
+      log("sink event=connect")
+      client = Fraggle.connect
+      log("sink event=rev")
+      client.rev do |r|
+        rev = r.rev
+        log("sink event=walk rev=#{rev}")
+        client.walk(rev, "/**") do |r|
+          log("sink event=res path=#{r.path}")
+          write(file, r)
+        end.done do
+          log("sink event=watch rev=#{rev+1}")
+          client.watch(rev+1, "/**") do |r|
+            log("sink event=res path=#{r.path}")
+            write(file, r)
+          end
+        end
       end
     end
   end
@@ -63,10 +92,6 @@ class Gorg
       log("load event=close")
       file.close
     end
-  end
-
-  def sink
-    raise("sink'ing, how does it work?")
   end
 
   def log(msg)
