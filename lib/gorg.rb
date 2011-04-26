@@ -14,7 +14,7 @@ class Gorg
   end
 
   def write(file, r)
-    file.puts(JSON.dump({"path" => r.path, "value" => r.value, "rev" => r.rev}))
+    file.puts(JSON.dump({"path" => r.path, "value" => r.value, "rev" => r.rev, "del" => r.del?}))
   end
 
   def dump
