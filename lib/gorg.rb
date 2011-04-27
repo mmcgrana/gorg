@@ -26,7 +26,7 @@ class Gorg
       log("dump event=connect")
       client = Fraggle.connect
       log("dump event=req")
-      client.walk(nil, "/**") do |r|
+      client.walk("/**") do |r|
         log("dump event=res path=#{r.path}")
         write(file, r)
       end.done do
@@ -51,12 +51,12 @@ class Gorg
       client.rev do |r|
         rev = r.rev
         log("sink event=walk rev=#{rev}")
-        client.walk(rev, "/**") do |r|
+        client.walk("/**") do |r|
           log("sink event=res path=#{r.path}")
           write(file, r)
         end.done do
           log("sink event=watch rev=#{rev+1}")
-          client.watch(rev+1, "/**") do |r|
+          client.watch("/**", rev+1) do |r|
             log("sink event=res path=#{r.path}")
             write(file, r)
           end
@@ -79,7 +79,7 @@ class Gorg
           log("load event=skip path=#{data["path"]}")
         else
           log("load event=req path=#{data["path"]}")
-          client.set(-1, data["path"], data["value"]) do
+          client.set(data["path"], data["value"], -1) do
             log("load event=res path=#{data["path"]}")
             if finishing
               log("load event=stop")

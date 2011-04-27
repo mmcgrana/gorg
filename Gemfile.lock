@@ -3,8 +3,9 @@ GEM
   specs:
     beefcake (0.3.1)
     eventmachine (0.12.10)
-    fraggle (1.0.0pre)
+    fraggle (1.0.1)
       beefcake (~> 0.3)
+      eventmachine
     json (1.5.1)
 
 PLATFORMS
@@ -12,5 +13,5 @@ PLATFORMS
 
 DEPENDENCIES
   eventmachine (= 0.12.10)
-  fraggle (= 1.0.0pre)
+  fraggle (= 1.0.1)
   json (= 1.5.1)
