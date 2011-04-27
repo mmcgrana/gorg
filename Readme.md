@@ -48,3 +48,4 @@ Omit the `-f` argument to use standard in and out:
 
 * Saves but does not not load data under the `/ctl` prefix, which is used internally by Doozer.
 * Saves but does not load `rev`s.
+* Saves `del`s in sink and applies on load.
