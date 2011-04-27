@@ -79,13 +79,18 @@ class Gorg
           log("load event=skip path=#{data["path"]}")
         else
           log("load event=req path=#{data["path"]}")
-          client.set(data["path"], data["value"], -1) do
+          res_block = Proc.new do
             log("load event=res path=#{data["path"]}")
             if finishing
               log("load event=stop")
               EM.stop
               log("load event=finish")
             end
+          end
+          if data["del"]
+            client.del(data["path"], -1, &res_block)
+          else
+            client.set(data["path"], data["value"], -1, &res_block)
           end
         end
       end
