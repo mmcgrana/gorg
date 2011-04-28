@@ -16,17 +16,17 @@ Capture a snapshot of a Doozer process, kill the process, restore from the snaps
 
     $ doozerd
     $ echo "save me" | doozer add /data
-    $ gorg dump > doozer.dat
+    $ bin/gorg dump > doozer.dat
     $ killall doozerd
     $ doozerd
-    $ gorg load < doozer.dat
+    $ bin/gorg load < doozer.dat
     $ doozer get /data
 
 Stream state from a Doozer process into an append-only file:
 
     $ doozerd
     $ echo "first" | doozer add /one
-    $ gorg sink > doozer.dat
+    $ bin/gorg sink > doozer.dat
     $ tail -f doozer.dat
     $ echo "second" | doozer add /two
     $ echo "third" | doozer add /three
