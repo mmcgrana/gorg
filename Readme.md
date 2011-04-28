@@ -22,7 +22,7 @@ Capture a snapshot of a Doozer process, kill the process, restore from the snaps
     $ gorg load -f doozer.dat
     $ doozer get /data
 
-Stream state from a Doozer process into an append-only file (not yet implemented):
+Stream state from a Doozer process into an append-only file:
 
     $ doozerd
     $ echo "first" | doozer add /one
