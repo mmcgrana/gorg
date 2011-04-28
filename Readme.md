@@ -44,3 +44,4 @@ Stream state from a Doozer process into an append-only file:
 * Saves but does not not load data under the `/ctl` prefix, which is used internally by Doozer.
 * Saves but does not load `rev`s.
 * Saves `del`s in sink and applies on load.
+* Gorg works against `doozerd` 0.5.
